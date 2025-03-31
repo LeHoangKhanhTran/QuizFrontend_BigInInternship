@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+:root {
+  --primary-color-dark: #313e51;
+  --background-dark: #2D3949;
+  --primary-color-light: white;
+  --background-light: #EDF1F9;
+  --secondary-color: #3c4d67;
+  --primary-action-color: #a629f6;
+  --primary-text-color: #faffff;
+  --secondary-text-color: #8696ae;
+  --html-background: #FFF1E9;
+  --css-background: #E0FDEF;
+  --javascript-background: #EBF0FF;
+  --accessibility-background: #F6E7FF;
+  --correct-color: #26D782;
+  --wrong-color: #EE5454;
+  font-family: 'Rubik', sans-serif;
+  overflow-x: hidden;
+  font-size: 16px;
+}
+
+body {
+  padding: 2.5rem 6rem;
+}
+
