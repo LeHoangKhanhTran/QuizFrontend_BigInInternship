@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import Header from './components/Header.vue';
-  import HomeView from './views/HomeView.vue';
   import { store } from "./stores/store.ts";
   import clsx from 'clsx';
   import { computed } from 'vue';
@@ -25,8 +24,8 @@
   <div :class="classes">
     <img :src="bgUrl" class="fixed z-[-1] box-border rotate-45 top-[-26%]" alt="bg-circle">
     <Header/>
+    <router-view/>
     <img :src="bgUrl" class="fixed z-[-1] box-border rotate-[230deg] bottom-[-28%] right-[2%]" alt="bg-circle">
-    <HomeView/>
   </div>
 </template>
 

@@ -12,7 +12,8 @@
     "@tailwindcss/vite": "^4.0.17",
     "clsx": "^2.1.1",
     "quiz-frontend": "file:",
-    "vue": "^3.5.13"
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.17",
