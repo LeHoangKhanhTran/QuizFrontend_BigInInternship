@@ -2,7 +2,7 @@
     import Toggle from './Toggle.vue';
 </script>
 <template>
-    <nav class="flex justify-between mb-16 z-1">
+    <nav class="flex justify-between mb-15 z-1">
         <router-link to="/" class="flex gap-3 items-center">
             <img src="../assets/vue.svg" alt="Logo" class="logo" width="36"/>
             <h1 class="text-[1.25rem] font-bold">Software Development Quiz with Vue</h1>

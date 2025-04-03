@@ -27,9 +27,10 @@ const classes = computed(() => clsx("w-full h-fit flex flex-col p-11 justify-bet
                     <p class="text-[var(--secondary-text-color)] font-medium text-[1.2rem] text-center">out of 10</p>
                 </div>
             </div>
-            <Button name="Review"/>
+            <Button name="Review" @click="$router.push('/user/1/record/1')"/>
             <p class="w-full rounded-[.875rem] py-4 flex justify-center font-bold text-[1.4rem] hover:text-[var(--primary-action-color)] 
-                      cursor-pointer border-[3px] border-[var(--primary-action-color)] hover:border-[var(--primary-color-light)]">
+                      cursor-pointer border-[3px] border-[var(--primary-action-color)] hover:border-[var(--primary-color-light)]"
+                @click="$router.push('/topic/1/quiz')">
                 Take quiz again
             </p>
         </section>

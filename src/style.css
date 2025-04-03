@@ -24,3 +24,27 @@ body {
   padding: 2.5rem 6rem;
 }
 
+::-webkit-scrollbar {
+  border-radius: 12px;
+  width: 7px;
+  height: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  border-radius: 5px;
+  background: var(--secondary-color);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  border-radius: 5px;
+  background: #777;
+}
+
