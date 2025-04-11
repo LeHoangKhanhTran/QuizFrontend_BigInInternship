@@ -6,6 +6,7 @@ import TopicView from "../views/TopicView.vue";
 import ResultView from "../views/ResultView.vue";
 import QuizView from "../views/QuizView.vue";
 import RecordView from "../views/RecordView.vue";
+import HistoryView from "../views/HistoryView.vue";
 
 const routes = [
     { path: '/', component: HomeView },
@@ -14,7 +15,8 @@ const routes = [
     { path: '/topic/:id', component: TopicView, props: true },
     { path: '/topic/:id/quiz', component: QuizView, props: true },
     { path: '/result/:id', component: ResultView, props: true },
-    { path: '/user/:id/record/:id', component: RecordView, props: true },
+    { path: '/record/:id', component: RecordView, props: true },
+    { path: '/user/:id/history', component: HistoryView, props: true },
 ]
 
 export const router = createRouter({

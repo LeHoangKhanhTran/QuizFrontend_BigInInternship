@@ -17,6 +17,6 @@
 </script>
 <template>
     <div :class="classes">
-        <span :style="{ width: progress + '%' }" class="h-full rounded-[inherit] bg-[var(--primary-action-color)]"></span>
+        <span :style="{ width: progress + '%' }" class="h-full rounded-[inherit] bg-[var(--primary-action-color)] transition-all ease-in-out"></span>
     </div>
 </template>

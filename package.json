@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.17",
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
+    "axios": "^1.8.4",
     "clsx": "^2.1.1",
     "quiz-frontend": "file:",
     "vue": "^3.5.13",
