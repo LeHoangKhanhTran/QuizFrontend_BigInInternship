@@ -15,7 +15,7 @@ import type { Question } from '../types';
 
     watch(() => questionId, async () => {
             try {
-                const response = await api.get(`http://localhost:5075/api/questions/${questionId}`);
+                const response = await api.get(`/api/questions/${questionId}`);
                 if (response.status === 200) {
                     question.value = response.data as Question;
                     console.log(question.value);

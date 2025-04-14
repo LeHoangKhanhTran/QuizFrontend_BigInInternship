@@ -8,6 +8,11 @@
     import type { AxiosError } from 'axios';
     import { router } from '../router/router';
     import type { User } from '../types';
+    import Toast from '../components/Toast.vue';
+    import { useToast } from '../composables/useToast';
+
+    const { show, toggleShow } = useToast();
+    const error = ref<{message: string, statusCode?: number}>();
     const form = ref({
         email: '',
         password: ''
@@ -57,9 +62,14 @@
                     router.push('/');
                 }
             }
-            catch(error) {
-                const axiosError = error as AxiosError;
+            catch(err) {
+                const axiosError = err as AxiosError;
                 console.error(axiosError);
+                error.value = {
+                    message: axiosError.response?.data as string || 'Something went wrong',
+                    statusCode: axiosError.response?.status
+                }
+                toggleShow();
             }
             finally {
                 store.userLoading = false;
@@ -70,7 +80,6 @@
 
 <template>
     <main class="w-full h-full flex items-center justify-center">
-
         <div :class="wrapperClasses">
             <img src="../assets/vue.svg" alt="vue-logo">
             <h2 :class="headingClasses">Login to your account</h2>
@@ -91,11 +100,14 @@
                 </label>
                 <button 
                 type="submit" 
-                class="w-full py-3 bg-[var(--primary-action-color)] text-[1.15rem] font-bold rounded-[.75rem] mt-6 cursor-pointer hover:bg-[var(--primary-color-light)] hover:text-[var(--primary-action-color)]" 
+                class="w-full py-3 bg-[var(--primary-action-color)] text-[1.15rem] font-bold rounded-[.75rem] mt-5 cursor-pointer hover:bg-[var(--primary-color-light)] hover:text-[var(--primary-action-color)]" 
                 >
                     Login now
                 </button>
             </form>
         </div>
+        <Teleport to="body">
+            <Toast v-if="show && error" :message="error.message" :status-code="error.statusCode" :onBtnClick="toggleShow" type="error"/>
+        </Teleport>
     </main>
 </template>

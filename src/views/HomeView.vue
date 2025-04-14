@@ -1,28 +1,11 @@
 <script setup lang="ts">
     import clsx from 'clsx';
     import { store } from '../stores/store';
-    import { computed, onMounted, ref } from 'vue';
-    import { api } from '../axios'; 
+    import { computed } from 'vue';
     import { type Topic } from '../types'; 
-    import { AxiosError } from 'axios';
+    import useFetch from '../composables/useFetch';
 
-    const topics = ref<Topic[]>([]);
-    onMounted(async () => {
-        const fetchTopics = async () => {
-            try {
-                const response = await api.get('/api/topics'); 
-                if (response.status === 200) {
-                    topics.value = response.data as Topic[]; 
-                    console.log(topics.value);
-                } 
-            }
-            catch (error) {
-                const axiosError = error as AxiosError;
-                console.error(axiosError);
-            }
-        }
-        await fetchTopics();
-    });
+    const { data: topics } = useFetch<Topic[]>('/api/topics');
 
     const classes = computed(() => clsx("w-full rounded-[14px] p-5 flex justify-center items-center font-bold text-[1.25rem] cursor-pointer hover:text-[var(--primary-action-color)] tracking-wide", 
     {

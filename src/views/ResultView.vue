@@ -2,29 +2,13 @@
 import Button from '../components/Button.vue';
 import clsx from 'clsx';
 import { store } from '../stores/store';
-import { computed, onMounted, ref } from 'vue';
+import { computed } from 'vue';
 import type { Record } from '../types';
-import type { AxiosError } from 'axios';
-import { api } from '../axios';
 import { useRoute } from 'vue-router';
+import useFetch from '../composables/useFetch';
 
-const record = ref<Record | null>(null);
 const route = useRoute();
-onMounted(async () => {
-    const fetchRecord = async () => {
-        try {
-            const response = await api.get(`/api/records/${route.params.id}`);
-            if (response.status === 200) {
-                record.value = response.data as Record;
-            } 
-        } 
-        catch (error) {
-            const axiosError = error as AxiosError;
-            console.error(axiosError);
-        }
-    };
-    await fetchRecord();
-});
+const { data: record } = useFetch<Record>(`/api/records/${route.params.id}`);
 
 const classes = computed(() => clsx("w-full h-fit flex flex-col p-11 justify-between items-center rounded-[14px] gap-8 border-[2px] border-[var(--primary-action-color)]",
     {

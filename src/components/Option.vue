@@ -60,8 +60,8 @@
         {{ labels[index] }}
       </div>
       <p class="text-start max-w-[80%] text-[1.15rem]">{{ content }}</p>
-      <img v-if="isCorrect" :src="checkIcon" alt="check icon" class="absolute right-4 select-none"/>
-      <img v-else-if="isCorrect === false" :src="xIcon" alt="x icon" class="absolute right-4 select-none"/>
+      <img v-if="isCorrect" :src="checkIcon" alt="check-icon" class="absolute right-4 select-none"/>
+      <img v-else-if="isCorrect === false" :src="xIcon" alt="x-icon" class="absolute right-4 select-none"/>
     </div>
   </li>
 </template>

@@ -2,19 +2,22 @@
     import Option from '../components/Option.vue';
     import ProgressBar from '../components/ProgressBar.vue';
     import Button from '../components/Button.vue';
-    import { computed, onMounted, ref } from 'vue';
+    import { computed, ref } from 'vue';
     import { api } from '../axios';
     import { useRoute, useRouter } from 'vue-router';
     import type { AxiosError } from 'axios';
     import type { Answer, Question, Record } from '../types';
     import { store } from '../stores/store';
+    import useFetch from '../composables/useFetch';
 
     const selectedId = ref("");
-    const questions = ref<Question[]>([]);
+    const route = useRoute();
+    const { data: questions } = useFetch<Question[]>(`/api/questions?topicId=${route.params.id}`);
     const currentIndex = ref(0);
     const router = useRouter();
     const progress = computed(() => {
-        return (currentIndex.value + 1) / questions.value.length * 100;
+        if (questions.value) return (currentIndex.value + 1) / questions.value.length * 100;
+        return 0;
     });
     const answers = ref<Answer[]>([]);  
     const open = ref(false)
@@ -45,7 +48,7 @@
     }
 
     const handleClick = async() => {
-        if (currentIndex.value <= questions.value.length - 1) {
+        if (questions.value && currentIndex.value <= questions.value.length - 1) {
             currentIndex.value++;
             answers.value.push({
                 questionId: questions.value[currentIndex.value - 1].id,
@@ -57,28 +60,10 @@
             }
         }
     }
-
-    const route = useRoute();
-    onMounted(async () => {
-        const fetchQuestions = async () => {
-            try {
-                const response = await api.get(`/api/questions?topicId=${route.params.id}`); 
-                if (response.status === 200) {
-                    questions.value = response.data as Question[]; 
-                } 
-            }
-            catch (error) {
-                const axiosError = error as AxiosError;
-                console.error(axiosError);
-            }
-        }   
-        await fetchQuestions();
-    })
-
 </script>
 <template>
     <main class="flex justify-between">
-        <section class="relative flex-1/2 shrink-0 flex flex-col" v-if="questions.length > 0 && currentIndex < questions.length">
+        <section class="relative flex-1/2 shrink-0 flex flex-col" v-if="questions && questions.length > 0 && currentIndex < questions.length">
             <h3 class="text-[1.2rem] mb-5 italic text-[var(--secondary-text-color)] font-semibold">
                 Question {{ currentIndex + 1 }} of {{ questions.length }}
             </h3>
@@ -86,7 +71,7 @@
             <ProgressBar :progress="progress"/>
         </section>
 
-        <section class="flex-1/2 shrink-0 pl-28 flex flex-col items-center gap-6" v-if="questions[currentIndex]">
+        <section class="flex-1/2 shrink-0 pl-28 flex flex-col items-center gap-6" v-if="questions && questions[currentIndex]">
             <Option v-for="option, index in questions[currentIndex].choices" @click="() => handlePick(option.id)" :is-active="selectedId===option.id" :content="option.content" :index="index"/>
             <Button :name="currentIndex < questions.length - 1 ? 'Next Question' : 'Submit'" @click="handleClick" :is-active="selectedId.length !== 0"/>
         </section>

@@ -7,7 +7,11 @@ import { minLength, required, helpers, sameAs } from "@vuelidate/validators";
 import type { AxiosError } from "axios";
 import { router } from "../router/router";
 import { api } from "../axios";
+import Toast from '../components/Toast.vue';
+import { useToast } from '../composables/useToast';
 
+const { show, toggleShow } = useToast();
+const error = ref<{message: string, statusCode?: number}>();
 const form = ref({
   email: "",
   password: "",
@@ -91,9 +95,14 @@ const handleClick = async () => {
         router.push("/login");
       }
     } 
-    catch(error) {
-      const axiosError = error as AxiosError;
-      console.error(axiosError);  
+    catch(err) {
+      const axiosError = err as AxiosError;
+      console.log(axiosError);  
+      error.value = {
+        message: (axiosError.response?.data as [{code: string, description: string}])[0].description || 'Something went wrong',
+        statusCode: axiosError.response?.status
+      }
+      toggleShow();
     }
   }
 };
@@ -146,5 +155,8 @@ const handleClick = async () => {
         </button>
       </form>
     </div>
+    <Teleport to="body">
+      <Toast v-if="show && error" :message="error.message" :status-code="error.statusCode" :onBtnClick="toggleShow" type="error"/>
+    </Teleport>
   </main>
 </template>

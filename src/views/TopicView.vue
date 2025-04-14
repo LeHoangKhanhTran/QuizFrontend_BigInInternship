@@ -1,29 +1,11 @@
 <script setup lang="ts">
-    import { onMounted, ref } from 'vue';
     import { useRoute } from 'vue-router';
     import Button from '../components/Button.vue';
     import type { Topic } from '../types';
-    import { api } from '../axios';
-    import type { AxiosError } from 'axios';
+    import useFetch from '../composables/useFetch';
 
-    const route = useRoute();
-    const topic = ref<Topic | null>(null); 
-    onMounted(async () => {
-        const fetchTopic = async () => {
-            try {
-                const response = await api.get(`/api/topics/${route.params.id}`); 
-                if (response.status === 200) {
-                    topic.value = response.data as Topic; 
-                    console.log(topic.value);
-                } 
-            }
-            catch (error) {
-                const axiosError = error as AxiosError;
-                console.error(axiosError);
-            }
-        }
-        await fetchTopic();
-    });
+    const route = useRoute(); 
+    const { data: topic } = useFetch<Topic>(`/api/topics/${route.params.id}`);
 </script>
 
 <template>

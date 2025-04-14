@@ -68,9 +68,9 @@
 </script>
 <template>
     <main class="w-full flex flex-col items-center justify-center" v-if="record">
-        <div class="w-[70%] h-fit px-22 flex flex-col items-center gap-8">
+        <div class="w-[70%] h-fit min-w-fit px-22 flex flex-col items-center gap-8">
             <header class="flex flex-col gap-3 items-center">
-                <h3 class="font-bold text-[1.8rem] flex gap-2"><span>Topic:</span>{{ record.topic.title }}</h3>
+                <h3 class="font-bold text-[2rem] flex gap-2"><span>Topic:</span>{{ record.topic.title }}</h3>
                 <div class="w-full flex justify-center gap-11">
                     <p class="text-[1.35rem]">Score <span class="font-bold text-[var(--primary-action-color)]">{{ record.score }}</span> of {{ record.answers.length }}</p>
                     <p class="text-[1.35rem]"><span class="text-[var(--correct-color)] font-semibold">{{ Math.round(record.score / record.answers.length * 100)}}%</span> correct</p>
@@ -78,7 +78,7 @@
                 </div>
                 <p class="text-[var(--secondary-text-color)] text-[1.1rem]">This record is created at <span>{{ formatDate(record.createdDate) }}</span> by <em v-if="user" class="text-[var(--primary-action-color)] font-bold">{{ user.email }}</em></p>
             </header>
-            <section class="flex flex-col gap-10 items-center w-full">
+            <section class="flex flex-col gap-10 items-center w-full max-w-[46rem]">
                 <RecordSection :question-id="record.answers[answerIndex].questionId" :question-number="record.answers.length" :choice-id="record.answers[answerIndex].choiceId" :index="answerIndex"/>
             </section>
             <section :class="buttonSectionClasses">
