@@ -37,7 +37,7 @@
             <img src="../assets/vue.svg" alt="Logo" class="logo" width="36"/>
             <h1 class="text-[1.25rem] font-bold">Software Development Quiz with Vue</h1>
         </router-link>
-        <div class="flex items-center gap-14 text-[1.1rem] font-bold" v-if="store.user === null && !store.userLoading">
+        <div class="flex items-center gap-14 text-[1.1rem] font-bold" v-if="store.user === null">
             <router-link to="/login" class="hover:text-[var(--primary-action-color)]" :class="$route.path === '/login' ? 'text-[var(--primary-action-color)]' : ''">Login</router-link>
             <router-link to="/register" class="hover:text-[var(--primary-action-color)]" :class="$route.path === '/register' ? 'text-[var(--primary-action-color)]' : ''">Register</router-link>
             <Toggle/>

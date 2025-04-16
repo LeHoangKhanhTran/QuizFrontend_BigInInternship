@@ -12,6 +12,7 @@ import { useRoute } from 'vue-router';
     const fetchRecords = async () => {
       try {
         const response = await api.get(`/api/records?userId=${route.params.id}`); 
+        console.log(response)
         if (response.status === 200) {
           records.value = response.data as Record[];
         }

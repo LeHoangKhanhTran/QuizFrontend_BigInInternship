@@ -18,7 +18,6 @@ import type { Question } from '../types';
                 const response = await api.get(`/api/questions/${questionId}`);
                 if (response.status === 200) {
                     question.value = response.data as Question;
-                    console.log(question.value);
                 } 
             }
             catch (error) {

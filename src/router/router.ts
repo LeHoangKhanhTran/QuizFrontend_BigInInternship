@@ -7,6 +7,7 @@ import ResultView from "../views/ResultView.vue";
 import QuizView from "../views/QuizView.vue";
 import RecordView from "../views/RecordView.vue";
 import HistoryView from "../views/HistoryView.vue";
+import DashboardView from "../views/DashboardView.vue"
 
 const routes = [
     { path: '/', component: HomeView },
@@ -17,6 +18,7 @@ const routes = [
     { path: '/result/:id', component: ResultView, props: true },
     { path: '/record/:id', component: RecordView, props: true },
     { path: '/user/:id/history', component: HistoryView, props: true },
+    { path: '/admin/dashboard', component: DashboardView }
 ]
 
 export const router = createRouter({

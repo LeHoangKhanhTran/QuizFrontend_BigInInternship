@@ -12,7 +12,7 @@
         'bg-[var(--secondary-color)]': store.theme === 'dark',
         'bg-[var(--primary-color-light)]': store.theme === 'light',
     }))
-    
+
 </script>
 <template>
     <main class="flex justify-between">

@@ -5,7 +5,8 @@
   import { computed, onBeforeMount } from 'vue';
   import darkBgCircle from './assets/dark-bg-circle.svg';
   import lightBgCircle from './assets/light-bg-circle.svg';
-import { api } from './axios';
+  import { api } from './axios';
+  import type { AxiosError } from 'axios';
   const classes = computed(() => {
       return clsx(
           'w-fit h-fit min-w-full min-h-full absolute top-0 left-0 px-24 py-10 z-0',
@@ -30,7 +31,7 @@ import { api } from './axios';
         }
       } 
       catch (error) {
-        console.error('Error fetching user:', error);
+        console.log(error as AxiosError)
       }
       finally {
         store.userLoading = false;
@@ -41,7 +42,6 @@ import { api } from './axios';
 </script>
 
 <template >
-  {{  console.log(store.user) }}
   <div :class="classes">
     <img :src="bgUrl" class="fixed z-[-1] box-border rotate-45 top-[-26%]" alt="bg-circle">
     <Header/>
